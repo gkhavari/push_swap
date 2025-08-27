@@ -17,12 +17,17 @@
 #include <stdlib.h>
 #include <limits.h>
 
-typedef struct stack
+typedef enum
 {
-    int data;
+    false = 0,
+    true = 1
+} bool;
+
+typedef struct stack_node
+{
+    int nbr;
     size_t index;
-    struct stack *prev;
-    struct stack *next;
-}   stack;
+    struct stack_node *next;
+}   stack_node;
 
 #endif

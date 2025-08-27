@@ -13,36 +13,59 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-stack *initialize_stack(char **args)
+bool	stack_is_sorted(stack_node *stack_a)
+{
+	if (!stack_a)
+		return (true);
+	while (stack_a->next != NULL)
+	{
+		if ((stack_a->next->nbr) < (stack_a->nbr))
+			return (false);
+		stack_a = stack_a->next;
+	}
+	return (true);
+}
+
+stack_node *initialize_stack(char **argv)
 {
     size_t i;
-    long nbr;
+    size_t j;
+    char **temp_split;
+    stack_node *stack;
 
-    i = 0;
-    while (args[i])
+    i = 1;
+    stack = NULL;
+    while (argv[i])
     {
-        nbr = ft_atoi(args[i]);
-        if(nbr > INT_MAX || nbr < INT_MIN || ft_check(res, nbr) == 0)
-        {
-            ft_putstr_fd("Error\n", 2);
-            return (NULL);
-        }
+        temp_split = ft_split(argv[i], ' ');
         i++;
+        j = 0;
+        while (temp_split[j])
+        {
+            if(!is_int(temp_split[j]) || !is_unique(stack, ft_atoi(temp_split[j])))
+                return(free_all(stack, temp_split, j));
+            add_node_back(&stack, new_node((int)ft_atoi(temp_split[j])));
+            free(temp_split[j]);
+            j++;
+        }
+        free(temp_split);
     }
+    return (stack);
 }
 
 int main(int argc, char **argv)
 {
-    char **args;
-    stack *stack_a;
+    stack_node *stack_a;
+    stack_node *stack_b;
 
     if (argc == 1)
+    {
+        ft_putstr_fd("Error\n", 2);
         return (0);
-    else if (argc == 2)
-        args = &argv[1];
-    else
-        args = ft_split(argv[1], ' ');
-    stack_a = (stack *) malloc(sizeof(stack));
-    stack_a = initialize_stacks(args);
-    print_stack(stack_a);
+    }
+    stack_a = initialize_stack(argv);
+    if (stack_a == NULL)
+		write(2, "Error\n", 6);
+	else
+		do_the_sorting(stack_a, stack_b);
 }
