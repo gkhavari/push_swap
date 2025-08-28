@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-bool	stack_is_sorted(stack_node *stack_a)
+t_bool	stack_is_sorted(t_stack_node *stack_a)
 {
 	if (!stack_a)
 		return (true);
@@ -26,46 +26,62 @@ bool	stack_is_sorted(stack_node *stack_a)
 	return (true);
 }
 
-stack_node *initialize_stack(char **argv)
+t_stack_node	*initialize_stack(char **argv)
 {
-    size_t i;
-    size_t j;
-    char **temp_split;
-    stack_node *stack;
+	size_t			i;
+	size_t			j;
+	char			**temp_split;
+	t_stack_node	*stack;
 
-    i = 1;
-    stack = NULL;
-    while (argv[i])
-    {
-        temp_split = ft_split(argv[i], ' ');
-        i++;
-        j = 0;
-        while (temp_split[j])
-        {
-            if(!is_int(temp_split[j]) || !is_unique(stack, ft_atoi(temp_split[j])))
-                return(free_all(stack, temp_split, j));
-            add_node_back(&stack, new_node((int)ft_atoi(temp_split[j])));
-            free(temp_split[j]);
-            j++;
-        }
-        free(temp_split);
-    }
-    return (stack);
+	i = 1;
+	stack = NULL;
+	while (argv[i])
+	{
+		temp_split = ft_split(argv[i], ' ');
+		i++;
+		j = 0;
+		while (temp_split[j])
+		{
+			if (!is_int(temp_split[j]) || !is_unique(stack, ft_atoi(temp_split[j])))
+				return (free_all(stack, temp_split, j));
+			add_node_back(&stack, make_new_node(ft_atoi(temp_split[j])));
+			free(temp_split[j]);
+			j++;
+		}
+		free(temp_split);
+	}
+	return (stack);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    stack_node *stack_a;
-    stack_node *stack_b;
+	t_stack_node	*stack_a;
+	t_stack_node	*stack_b;
 
-    if (argc == 1)
-    {
-        ft_putstr_fd("Error\n", 2);
-        return (0);
-    }
-    stack_a = initialize_stack(argv);
-    if (stack_a == NULL)
+	stack_b = NULL;
+	if (argc == 1)
+	{
+		ft_putstr_fd("Error\n", 2);
+		return (0);
+	}
+	stack_a = initialize_stack(argv);
+	if (stack_a == NULL)
 		write(2, "Error\n", 6);
-	else
-		do_the_sorting(stack_a, stack_b);
+//	else
+//		do_the_sorting(stack_a, stack_b);
+	write(1, "---a---\n", 8);
+	while(stack_a != NULL)
+	{
+		ft_putnbr_fd(stack_a->nbr, 1);
+		write(1, "\n", 1);
+		stack_a = stack_a->next;
+	}
+	write(1, "\n", 1);
+	write(1, "---b---\n", 8);
+	while(stack_b != NULL)
+	{
+		ft_putnbr_fd(stack_b->nbr, 1);
+		write(1, "\n", 1);
+		stack_b = stack_b->next;
+	}
 }
