@@ -1,0 +1,54 @@
+#include "push_swap.h"
+#include "libft.h"
+
+size_t get_size(t_stack_node *stack)
+{
+	size_t size;
+	t_stack_node *temp;
+
+	size = 0;
+	temp = stack;
+	while(temp)
+	{
+		temp = temp->next;
+		size++;
+	}
+	return (size);
+}
+
+int find_min(t_stack_node *stack)
+{
+	int min;
+	t_stack_node *node;
+
+	node = stack;
+	min = node->nbr;
+	while (node)
+	{
+		if (node->nbr < min)
+			min = node->nbr;
+		node = node->next;
+	}
+	return (min);
+}
+
+t_stack_node *find_next_bigger(t_stack_node *stack, size_t min_nbr)
+{
+	int new_min;
+	t_stack_node *node;
+	t_stack_node *res;
+
+	new_min = INT_MAX;
+	node = stack;
+	res = stack;
+	while(node)
+	{
+		if (node->nbr > min_nbr && node->nbr <= new_min)
+		{
+			new_min = node->nbr;
+			res = node;
+		}
+		node = node->next;
+	}
+	return (res);
+}

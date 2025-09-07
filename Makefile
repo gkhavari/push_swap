@@ -12,6 +12,8 @@ SRCS_FILES 	= \
 			main \
 			initialization \
 			input_checks \
+			operations \
+			sort \
 			
 SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))

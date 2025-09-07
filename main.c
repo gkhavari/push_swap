@@ -53,6 +53,26 @@ t_stack_node	*initialize_stack(char **argv)
 	return (stack);
 }
 
+void assign_order(t_stack_node **stack)
+{
+	size_t stack_size;
+	size_t i;
+	int min_nbr;
+	t_stack_node *node;
+	
+	i = 1;
+	stack_size = get_size(*stack);
+	min_nbr = find_min(stack);
+	node = *stack;
+	while (i < stack_size)
+	{
+		node = find_next_bigger(stack, min_nbr);
+		node->index = i;
+		min_nbr = node->nbr;
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack_node	*stack_a;
@@ -67,8 +87,11 @@ int	main(int argc, char **argv)
 	stack_a = initialize_stack(argv);
 	if (stack_a == NULL)
 		write(2, "Error\n", 6);
-//	else
-//		do_the_sorting(stack_a, stack_b);
+	else
+	{
+		assign_order(&stack_a);
+		do_the_sorting(&stack_a, &stack_b);
+	}
 	write(1, "---a---\n", 8);
 	while(stack_a != NULL)
 	{
