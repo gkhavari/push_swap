@@ -32,7 +32,7 @@ int find_min(t_stack_node *stack)
 	return (min);
 }
 
-t_stack_node *find_next_bigger(t_stack_node *stack, size_t min_nbr)
+t_stack_node *find_next_bigger(t_stack_node *stack, int min_nbr)
 {
 	int new_min;
 	t_stack_node *node;

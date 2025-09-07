@@ -22,14 +22,16 @@ void	do_the_sorting(t_stack_node **stack_a, t_stack_node **stack_b)
 	size_t sig_digits;
 
 	sig_digits = 0;
+
+	write(1, "Test2\n", 6);
 	while (sig_digits < 32)
 	{
-		size_stack = get_size(stack_a);
+		size_stack = get_size(*stack_a);
 		while (size_stack--)
 		{
 			if(*stack_b == NULL && is_sorted(stack_a))
 				return ;
-			if (((*stack_a)->nbr>>sig_digits & 1) == 1)
+			if (((*stack_a)->index>>sig_digits & 1) == 1)
 			{
 				do_rotate(stack_a); //ra
 				ft_putstr_fd("ra\n", 1);

@@ -62,11 +62,11 @@ void assign_order(t_stack_node **stack)
 	
 	i = 1;
 	stack_size = get_size(*stack);
-	min_nbr = find_min(stack);
+	min_nbr = find_min(*stack);
 	node = *stack;
 	while (i < stack_size)
 	{
-		node = find_next_bigger(stack, min_nbr);
+		node = find_next_bigger(*stack, min_nbr);
 		node->index = i;
 		min_nbr = node->nbr;
 		i++;
@@ -96,6 +96,8 @@ int	main(int argc, char **argv)
 	while(stack_a != NULL)
 	{
 		ft_putnbr_fd(stack_a->nbr, 1);
+		write(1, "\t", 1);
+		ft_putnbr_fd(stack_a->index, 1);
 		write(1, "\n", 1);
 		stack_a = stack_a->next;
 	}
@@ -107,4 +109,5 @@ int	main(int argc, char **argv)
 		write(1, "\n", 1);
 		stack_b = stack_b->next;
 	}
+	free_stack(stack_a);
 }
