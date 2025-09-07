@@ -4,7 +4,7 @@ LIBFT		=	libft/
 SRCS_DIR	=	./
 OBJS_DIR	=	obj/
 CC		=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g
 RM		=	rm -f
 AR		=	ar rcs
 

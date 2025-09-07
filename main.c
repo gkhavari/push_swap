@@ -6,7 +6,7 @@
 /*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 16:26:08 by gkhavari          #+#    #+#             */
-/*   Updated: 2025/08/25 16:26:11 by gkhavari         ###   ########.fr       */
+/*   Updated: 2025/09/07 23:49:16 by gkhavari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_stack_node	*initialize_stack(char **argv)
 	while (argv[i])
 	{
 		temp_split = ft_split(argv[i], ' ');
+		if (!temp_split)
+			return (NULL);
 		i++;
 		j = 0;
 		while (temp_split[j])
@@ -53,13 +55,13 @@ t_stack_node	*initialize_stack(char **argv)
 	return (stack);
 }
 
-void assign_order(t_stack_node **stack)
+void	assign_order(t_stack_node **stack)
 {
-	size_t stack_size;
-	size_t i;
-	int min_nbr;
-	t_stack_node *node;
-	
+	size_t			stack_size;
+	size_t			i;
+	int				min_nbr;
+	t_stack_node	*node;
+
 	i = 1;
 	stack_size = get_size(*stack);
 	min_nbr = find_min(*stack);
@@ -87,27 +89,10 @@ int	main(int argc, char **argv)
 	stack_a = initialize_stack(argv);
 	if (stack_a == NULL)
 		write(2, "Error\n", 6);
-	else
+	else if (!stack_is_sorted(stack_a))
 	{
 		assign_order(&stack_a);
 		do_the_sorting(&stack_a, &stack_b);
-	}
-	write(1, "---a---\n", 8);
-	while(stack_a != NULL)
-	{
-		ft_putnbr_fd(stack_a->nbr, 1);
-		write(1, "\t", 1);
-		ft_putnbr_fd(stack_a->index, 1);
-		write(1, "\n", 1);
-		stack_a = stack_a->next;
-	}
-	write(1, "\n", 1);
-	write(1, "---b---\n", 8);
-	while(stack_b != NULL)
-	{
-		ft_putnbr_fd(stack_b->nbr, 1);
-		write(1, "\n", 1);
-		stack_b = stack_b->next;
 	}
 	free_stack(stack_a);
 }

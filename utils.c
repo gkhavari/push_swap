@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gkhavari <gkhavari@student.42vienna.c      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/07 23:49:59 by gkhavari          #+#    #+#             */
+/*   Updated: 2025/09/07 23:50:03 by gkhavari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include "libft.h"
 
-size_t get_size(t_stack_node *stack)
+size_t	get_size(t_stack_node *stack)
 {
-	size_t size;
-	t_stack_node *temp;
+	size_t			size;
+	t_stack_node	*temp;
 
 	size = 0;
 	temp = stack;
-	while(temp)
+	while (temp)
 	{
 		temp = temp->next;
 		size++;
@@ -16,10 +28,10 @@ size_t get_size(t_stack_node *stack)
 	return (size);
 }
 
-int find_min(t_stack_node *stack)
+int	find_min(t_stack_node *stack)
 {
-	int min;
-	t_stack_node *node;
+	int				min;
+	t_stack_node	*node;
 
 	node = stack;
 	min = node->nbr;
@@ -32,16 +44,16 @@ int find_min(t_stack_node *stack)
 	return (min);
 }
 
-t_stack_node *find_next_bigger(t_stack_node *stack, int min_nbr)
+t_stack_node	*find_next_bigger(t_stack_node *stack, int min_nbr)
 {
-	int new_min;
-	t_stack_node *node;
-	t_stack_node *res;
+	int				new_min;
+	t_stack_node	*node;
+	t_stack_node	*res;
 
 	new_min = INT_MAX;
 	node = stack;
 	res = stack;
-	while(node)
+	while (node)
 	{
 		if (node->nbr > min_nbr && node->nbr <= new_min)
 		{
