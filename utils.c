@@ -13,6 +13,37 @@
 #include "push_swap.h"
 #include "libft.h"
 
+t_bool	is_sorted(t_stack_node *stack)
+{
+	t_stack_node	*node;
+
+	node = stack;
+	while (node->next)
+	{
+		if (node->nbr > node->next->nbr)
+			node = node->next;
+		else
+			return (false);
+	}
+	return (true);
+}
+
+size_t	find_biggest(t_stack_node	*stack)
+{
+	t_stack_node	*temp;
+	size_t			max_value;
+
+	max_value = 0;
+	temp = stack;
+	while (temp)
+	{
+		if (max_value < temp->index)
+			max_value = temp-> index;
+		temp = temp->next;
+	}
+	return (max_value);
+}
+
 size_t	get_size(t_stack_node *stack)
 {
 	size_t			size;

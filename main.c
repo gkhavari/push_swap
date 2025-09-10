@@ -44,11 +44,11 @@ t_stack_node	*initialize_stack(char **argv)
 		j = 0;
 		while (temp_split[j])
 		{
-			if (!is_int(temp_split[j]) || !is_unique(stack, ft_atoi(temp_split[j])))
+			if (!is_int(temp_split[j])
+				|| !is_unique(stack, ft_atoi(temp_split[j])))
 				return (free_all(stack, temp_split, j));
 			add_node_back(&stack, make_new_node(ft_atoi(temp_split[j])));
-			free(temp_split[j]);
-			j++;
+			free(temp_split[j++]);
 		}
 		free(temp_split);
 	}
@@ -79,6 +79,7 @@ int	main(int argc, char **argv)
 {
 	t_stack_node	*stack_a;
 	t_stack_node	*stack_b;
+	size_t			stack_size;
 
 	stack_b = NULL;
 	if (argc == 1)
@@ -87,12 +88,16 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	stack_a = initialize_stack(argv);
+	stack_size = get_size(stack_a);
 	if (stack_a == NULL)
 		write(2, "Error\n", 6);
 	else if (!stack_is_sorted(stack_a))
 	{
 		assign_order(&stack_a);
-		do_the_sorting(&stack_a, &stack_b);
+		if (stack_size <= 5)
+			sort_small_stack(&stack_a, &stack_b);
+		else
+			sort_big_stack(&stack_a, &stack_b);
 	}
 	free_stack(stack_a);
 }

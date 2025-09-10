@@ -11,20 +11,23 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft.h"
 
-void	do_push(t_stack_node **stack_a, t_stack_node **stack_b)
+void	do_push(t_stack_node **stack_from, t_stack_node **stack_to,
+			char *output)
 {
 	t_stack_node	*temp;
 
-	if (*stack_a == NULL)
+	if (*stack_from == NULL)
 		return ;
-	temp = *stack_a;
-	*stack_a = (*stack_a)->next;
-	temp->next = *stack_b;
-	*stack_b = temp;
+	temp = *stack_from;
+	*stack_from = (*stack_from)->next;
+	temp->next = *stack_to;
+	*stack_to = temp;
+	ft_putstr_fd(output, 1);
 }
 
-void	do_swap(t_stack_node **stack)
+void	do_swap(t_stack_node **stack, char *output)
 {
 	t_stack_node	*temp;
 
@@ -34,9 +37,10 @@ void	do_swap(t_stack_node **stack)
 	*stack = (*stack)->next;
 	temp->next = (*stack)->next;
 	(*stack)->next = temp;
+	ft_putstr_fd(output, 1);
 }
 
-void	do_rotate(t_stack_node **stack)
+void	do_rotate(t_stack_node **stack, char *output)
 {
 	t_stack_node	*first;
 	t_stack_node	*last;
@@ -50,9 +54,10 @@ void	do_rotate(t_stack_node **stack)
 		last = last->next;
 	last->next = first;
 	first->next = NULL;
+	ft_putstr_fd(output, 1);
 }
 
-void	do_rrotate(t_stack_node **stack)
+void	do_rrotate(t_stack_node **stack, char *output)
 {
 	t_stack_node	*prev;
 	t_stack_node	*last;
@@ -69,4 +74,5 @@ void	do_rrotate(t_stack_node **stack)
 	prev->next = NULL;
 	last->next = *stack;
 	*stack = last;
+	ft_putstr_fd(output, 1);
 }

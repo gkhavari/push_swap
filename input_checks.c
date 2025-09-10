@@ -22,6 +22,20 @@ t_bool	int_overflow(int sign, int nbr, int digit)
 	return (false);
 }
 
+int	parse_sign(char c, size_t *i)
+{
+	int		sign;
+
+	sign = 1;
+	if (c == '-' || c == '+')
+	{
+		if (c == '-')
+			sign = -1;
+		(*i)++;
+	}
+	return (sign);
+}
+
 t_bool	is_int(char *input)
 {
 	int		nbr;
@@ -29,15 +43,9 @@ t_bool	is_int(char *input)
 	int		digit;
 	size_t	i;
 
-	sign = 1;
 	i = 0;
 	nbr = 0;
-	if (input[i] == '-' || input[i] == '+')
-	{
-		if (input[i] == '-')
-			sign = -1;
-		i++;
-	}
+	sign = parse_sign(input[i], &i);
 	if (!(input[i] >= '0' && input[i] <= '9'))
 		return (false);
 	while (input[i] >= '0' && input[i] <= '9')
