@@ -11,22 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
-
-t_bool	is_sorted(t_stack_node *stack)
-{
-	t_stack_node	*node;
-
-	node = stack;
-	while (node->next)
-	{
-		if (node->nbr > node->next->nbr)
-			node = node->next;
-		else
-			return (false);
-	}
-	return (true);
-}
+#include "libft/libft.h"
 
 size_t	find_biggest(t_stack_node	*stack)
 {
@@ -83,7 +68,7 @@ t_stack_node	*find_next_bigger(t_stack_node *stack, int min_nbr)
 
 	new_min = INT_MAX;
 	node = stack;
-	res = stack;
+	res = NULL;
 	while (node)
 	{
 		if (node->nbr > min_nbr && node->nbr <= new_min)

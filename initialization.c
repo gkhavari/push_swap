@@ -53,10 +53,18 @@ void	free_stack(t_stack_node *stack)
 	}
 }
 
-t_stack_node	*free_all(t_stack_node *stack, char **temp_split, int i)
+t_stack_node	*free_all(t_stack_node *stack, char **temp_split)
 {
-	free(temp_split[i]);
+	int	i;
+
+	i = 0;
+	while (temp_split[i])
+	{
+		free(temp_split[i]);
+		i++;
+	}
 	free(temp_split);
-	free_stack(stack);
+	if (stack)
+		free_stack(stack);
 	return (NULL);
 }

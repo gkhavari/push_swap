@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <limits.h>
+#include "libft/libft.h"
 
-t_bool	int_overflow(int sign, int nbr, int digit)
+static t_bool	int_overflow(int sign, int nbr, int digit)
 {
 	if (sign == 1 && (nbr > (INT_MAX - digit) / 10))
 		return (true);
@@ -22,7 +22,7 @@ t_bool	int_overflow(int sign, int nbr, int digit)
 	return (false);
 }
 
-int	parse_sign(char c, size_t *i)
+static int	parse_sign(char c, size_t *i)
 {
 	int		sign;
 

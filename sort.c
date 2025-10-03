@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
+#include "libft/libft.h"
 
-void	sort_two_three(t_stack_node **stack_a)
+static void	sort_two_three(t_stack_node **stack_a)
 {
 	size_t	max_value;
 
@@ -30,7 +30,7 @@ void	sort_two_three(t_stack_node **stack_a)
 	}
 }
 
-void	sort_four_five(t_stack_node **stack_a, t_stack_node **stack_b)
+static void	sort_four_five(t_stack_node **stack_a, t_stack_node **stack_b)
 {
 	size_t	pushed;
 
@@ -77,17 +77,26 @@ void	sort_big_stack(t_stack_node **stack_a, t_stack_node **stack_b)
 		max_bits++;
 	while (i < max_bits)
 	{
+		size = get_size(*stack_a);
 		j = 0;
-		while (j < size)
+		while (j++ < size)
 		{
 			if (((*stack_a)->index >> i) & 1)
 				do_rotate(stack_a, "ra\n");
 			else
 				do_push(stack_a, stack_b, "pb\n");
-			j++;
 		}
 		while (*stack_b)
 			do_push(stack_b, stack_a, "pa\n");
 		i++;
 	}
+}
+
+void	do_the_sorting(size_t stack_size,
+		t_stack_node **stack_a, t_stack_node **stack_b)
+{
+	if (stack_size <= 5)
+		sort_small_stack(stack_a, stack_b);
+	else
+		sort_big_stack(stack_a, stack_b);
 }

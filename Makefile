@@ -4,7 +4,7 @@ LIBFT		=	libft/
 SRCS_DIR	=	./
 OBJS_DIR	=	obj/
 CC		=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-Wall -Wextra -Werror
 RM		=	rm -f
 AR		=	ar rcs
 
@@ -14,7 +14,7 @@ SRCS_FILES 	= \
 			input_checks \
 			operations \
 			sort \
-			utils \
+			utils
 			
 SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILES)))
 OBJS		=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(SRCS_FILES)))

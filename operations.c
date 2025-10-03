@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
+#include "libft/libft.h"
 
 void	do_push(t_stack_node **stack_from, t_stack_node **stack_to,
 			char *output)
