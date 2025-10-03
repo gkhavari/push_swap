@@ -26,7 +26,7 @@ static t_bool	stack_is_sorted(t_stack_node *stack_a)
 	return (true);
 }
 
-void	free_stack(t_stack_node *stack)
+static void	free_stack(t_stack_node *stack)
 {
 	t_stack_node	*temp;
 
@@ -38,19 +38,25 @@ void	free_stack(t_stack_node *stack)
 	}
 }
 
-t_stack_node	*free_all(t_stack_node *stack, char **temp_split)
+t_stack_node	*free_all(t_stack_node *stack_a, t_stack_node *stack_b,
+	char **temp_split)
 {
 	int	i;
 
 	i = 0;
-	while (temp_split[i])
+	if (temp_split)
 	{
-		free(temp_split[i]);
-		i++;
+		while (temp_split[i])
+		{
+			free(temp_split[i]);
+			i++;
+		}
+		free(temp_split);
 	}
-	free(temp_split);
-	if (stack)
-		free_stack(stack);
+	if (stack_a)
+		free_stack(stack_a);
+	if (stack_b)
+		free_stack(stack_b);
 	return (NULL);
 }
 
@@ -77,6 +83,5 @@ int	main(int argc, char **argv)
 		assign_order(&stack_a);
 		do_the_sorting(stack_size, &stack_a, &stack_b);
 	}
-	free_stack(stack_a);
-	free_stack(stack_b);
+	free_all(stack_a, stack_b, NULL);
 }

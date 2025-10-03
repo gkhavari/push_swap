@@ -30,8 +30,8 @@ typedef struct t_stack_node
 	struct t_stack_node	*next;
 }	t_stack_node;
 
-void			free_stack(t_stack_node *stack);
-t_stack_node	*free_all(t_stack_node *stack, char **temp_split);
+t_stack_node	*free_all(t_stack_node *stack_a, t_stack_node *stack_b,
+					char **temp_split);
 t_stack_node	*initialize_stack(char **argv);
 void			assign_order(t_stack_node **stack);
 t_bool			is_int(char *input);

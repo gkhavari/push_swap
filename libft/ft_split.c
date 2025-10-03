@@ -75,10 +75,14 @@ static int	write_split(char **dest, const char *str, const char c)
 char	**ft_split(char const *str, char c)
 {
 	char	**dest;
+	size_t	word_count;
 
-	if (str == NULL)
+	if (str == NULL || str[0] == '\0')
 		return (NULL);
-	dest = (char **)malloc(sizeof(char *) * (count_words(str, c) + 1));
+	word_count = count_words(str, c);
+	if (word_count == 0)
+		return (NULL);
+	dest = (char **)malloc(sizeof(char *) * (word_count + 1));
 	if (dest == NULL)
 		return (NULL);
 	if (!write_split(dest, str, c))

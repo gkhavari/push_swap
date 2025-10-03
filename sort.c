@@ -16,18 +16,22 @@
 static void	sort_two_three(t_stack_node **stack_a)
 {
 	size_t	max_value;
+	size_t	stack_size;
 
+	stack_size = get_size(*stack_a);
+	if (stack_size == 2)
+	{
+		if ((*stack_a)->index > (*stack_a)->next->index)
+			do_swap(stack_a, "sa\n");
+		return ;
+	}
 	max_value = find_biggest(*stack_a);
 	if ((*stack_a)->index == max_value)
 		do_rotate(stack_a, "ra\n");
 	if ((*stack_a)->next->index == max_value)
-	{
 		do_rrotate(stack_a, "rra\n");
-	}
 	if ((*stack_a)->index > (*stack_a)->next->index)
-	{
 		do_swap(stack_a, "sa\n");
-	}
 }
 
 static void	sort_four_five(t_stack_node **stack_a, t_stack_node **stack_b)

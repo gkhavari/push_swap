@@ -76,17 +76,17 @@ t_stack_node	*initialize_stack(char **argv)
 	{
 		temp_split = ft_split(argv[i++], ' ');
 		if (!temp_split)
-			return (free_stack(stack), NULL);
+			return (free_all(stack, NULL, NULL));
 		j = 0;
 		while (temp_split[j])
 		{
 			new_node = make_new_node(ft_atoi(temp_split[j]));
 			if (!is_int(temp_split[j])
 				|| !is_unique(stack, ft_atoi(temp_split[j++])) || !new_node)
-				return (free_all(stack, temp_split), NULL);
+				return (free_all(stack, new_node, temp_split));
 			add_node_back(&stack, new_node);
 		}
-		free_all(NULL, temp_split);
+		free_all(NULL, NULL, temp_split);
 	}
 	return (stack);
 }
