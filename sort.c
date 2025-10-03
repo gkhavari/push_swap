@@ -52,7 +52,7 @@ static void	sort_four_five(t_stack_node **stack_a, t_stack_node **stack_b)
 		do_swap(stack_a, "sa\n");
 }
 
-void	sort_small_stack(t_stack_node **stack_a, t_stack_node **stack_b)
+static void	sort_small_stack(t_stack_node **stack_a, t_stack_node **stack_b)
 {
 	size_t	stack_size;
 
@@ -63,7 +63,7 @@ void	sort_small_stack(t_stack_node **stack_a, t_stack_node **stack_b)
 		sort_four_five(stack_a, stack_b);
 }
 
-void	sort_big_stack(t_stack_node **stack_a, t_stack_node **stack_b)
+static void	sort_big_stack(t_stack_node **stack_a, t_stack_node **stack_b)
 {
 	size_t	size;
 	size_t	max_bits;

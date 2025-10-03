@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 
-t_bool	stack_is_sorted(t_stack_node *stack_a)
+static t_bool	stack_is_sorted(t_stack_node *stack_a)
 {
 	if (!stack_a)
 		return (true);
@@ -26,55 +26,32 @@ t_bool	stack_is_sorted(t_stack_node *stack_a)
 	return (true);
 }
 
-t_stack_node	*initialize_stack(char **argv)
+void	free_stack(t_stack_node *stack)
 {
-	size_t			i;
-	size_t			j;
-	char			**temp_split;
-	t_stack_node	*stack;
-	t_stack_node	*new_node;
+	t_stack_node	*temp;
 
-	i = 1;
-	stack = NULL;
-	while (argv[i])
+	while (stack)
 	{
-		temp_split = ft_split(argv[i++], ' ');
-		if (!temp_split)
-			return (free_stack(stack), NULL);
-		j = 0;
-		while (temp_split[j])
-		{
-			new_node = make_new_node(ft_atoi(temp_split[j]));
-			if (!is_int(temp_split[j])
-				|| !is_unique(stack, ft_atoi(temp_split[j++])) || !new_node)
-				return (free_all(stack, temp_split), NULL);
-			add_node_back(&stack, new_node);
-		}
-		free_all(NULL, temp_split);
+		temp = stack->next;
+		free(stack);
+		stack = temp;
 	}
-	return (stack);
 }
 
-void	assign_order(t_stack_node **stack)
+t_stack_node	*free_all(t_stack_node *stack, char **temp_split)
 {
-	size_t			stack_size;
-	size_t			i;
-	int				min_nbr;
-	t_stack_node	*node;
+	int	i;
 
 	i = 0;
-	stack_size = get_size(*stack);
-	min_nbr = INT_MIN;
-	node = *stack;
-	while (i < stack_size)
+	while (temp_split[i])
 	{
-		node = find_next_bigger(*stack, min_nbr);
-		if (node == NULL)
-			return ;
-		node->index = i;
-		min_nbr = node->nbr;
+		free(temp_split[i]);
 		i++;
 	}
+	free(temp_split);
+	if (stack)
+		free_stack(stack);
+	return (NULL);
 }
 
 int	main(int argc, char **argv)

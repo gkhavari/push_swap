@@ -30,21 +30,20 @@ typedef struct t_stack_node
 	struct t_stack_node	*next;
 }	t_stack_node;
 
-
-t_stack_node	*make_new_node(int nbr);
-void	add_node_back(t_stack_node **stack, t_stack_node *new);
-void	free_stack(t_stack_node *stack);
-t_stack_node	*free_all(t_stack_node *stack, char **temp_split, int i);
-t_bool	int_overflow(int sign, int nbr, int digit);
-t_bool	is_int(char *input);
-t_bool	is_unique(t_stack_node *stack, int nbr);
-void	do_the_sorting(t_stack_node **stack_a, t_stack_node **stack_b);
-void	do_push(t_stack_node **stack_a, t_stack_node **stack_b);
-void	do_rotate(t_stack_node **stack);
-size_t get_size(t_stack_node *stack);
-t_stack_node *find_next_bigger(t_stack_node *stack, int min_nbr);
-int find_min(t_stack_node *stack);
-
-
+void			free_stack(t_stack_node *stack);
+t_stack_node	*free_all(t_stack_node *stack, char **temp_split);
+t_stack_node	*initialize_stack(char **argv);
+void			assign_order(t_stack_node **stack);
+t_bool			is_int(char *input);
+t_bool			is_unique(t_stack_node *stack, int nbr);
+void			do_push(t_stack_node **stack_from, t_stack_node **stack_to,
+					char *output);
+void			do_swap(t_stack_node **stack, char *output);
+void			do_rotate(t_stack_node **stack, char *output);
+void			do_rrotate(t_stack_node **stack, char *output);
+void			do_the_sorting(size_t stack_size,
+					t_stack_node **stack_a, t_stack_node **stack_b);
+size_t			find_biggest(t_stack_node	*stack);
+size_t			get_size(t_stack_node *stack);
 
 #endif
